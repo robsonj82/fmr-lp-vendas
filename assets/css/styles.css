@@ -713,6 +713,96 @@ button {
 }
 
 /* ============================================
+   GALLERY / PORTFOLIO - Premium Design
+   ============================================ */
+.gallery {
+    padding: var(--space-3xl) 0;
+    background: var(--white);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    aspect-ratio: 1;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-base);
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.gallery-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-slow);
+}
+
+.gallery-item:hover .gallery-image img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-overlay);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-lg);
+    opacity: 0;
+    transition: var(--transition-base);
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-content {
+    color: var(--white);
+}
+
+.gallery-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    transform: translateY(20px);
+    transition: var(--transition-base);
+}
+
+.gallery-item:hover .gallery-content h3 {
+    transform: translateY(0);
+}
+
+.gallery-content p {
+    font-size: 0.9375rem;
+    color: rgba(255,255,255,0.9);
+    transform: translateY(20px);
+    transition: var(--transition-base);
+    transition-delay: 0.1s;
+}
+
+.gallery-item:hover .gallery-content p {
+    transform: translateY(0);
+}
+
+/* ============================================
    COURSE CONTENT - Redesign
    ============================================ */
 .course-content {
@@ -1450,7 +1540,8 @@ button {
 
     .modules-grid,
     .benefits-grid,
-    .for-who-grid {
+    .for-who-grid,
+    .gallery-grid {
         grid-template-columns: 1fr;
     }
 
