@@ -16,10 +16,10 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: ${{ secrets.FTP_HOST }}
+          server: ${{ secrets.FTP_SERVER }}
           port: 21
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_SERVER }}
           server-dir: /public_html/  # ou ajuste se necessário
           local-dir: ./              # raiz do projeto
           dangerous-clean-slate: true
