@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftp    # Ou ftps se o servidor exigir
-          server-dir: /public_html/
+          server-dir: /
           local-dir: ./    # Se não tiver build, deixa assim
           dangerous-clean-slate: true
           dry-run: false
