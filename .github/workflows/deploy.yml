@@ -4,11 +4,12 @@ on:
   workflow_dispatch:  # Permite rodar manualmente se quiser
   push:
     branches:
-      - 'claude/nails-course-landing-page-011CV4KzgzRmMZwmb2HwuMnf'  # 👈 Aspas simples obrigatórias!
+      - 'claude/nails-course-landing-page-011CV4KzgzRmMZwmb2HwuMnf'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: 📦 Clonar o repositório
         uses: actions/checkout@v3
@@ -19,11 +20,10 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          
-       port: 21
-          protocol: ftp  # ou ftps se seu servidor exigir TLS
+          port: 21
+          protocol: ftp    # Ou ftps se o servidor exigir
           server-dir: /public_html/
-          local-dir: ./  # ou dist/, dependendo do projeto
+          local-dir: ./    # Se não tiver build, deixa assim
           dangerous-clean-slate: true
           dry-run: false
           log-level: verbose
