@@ -1,40 +1,26 @@
-name: Deploy Lovable via FTP na Hostinger
+name: 🚀 Deploy para Napoleon via FTP
 
 on:
+  workflow_dispatch:  # Permite rodar manualmente se quiser
   push:
     branches:
-      - main
+      - 'claude/nails-course-landing-page-011CV4KzgzRmMZwmb2HwuMnf'  # 👈 Aspas simples obrigatórias!
 
 jobs:
-  build-and-deploy:
+  ftp-deploy:
+    name: 📤 Enviando arquivos via FTP
     runs-on: ubuntu-latest
+
     steps:
-      - name: Clonar o repositório
+      - name: 🔄 Checkout do código
         uses: actions/checkout@v3
 
-      - name: Configurar Node.js 18
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Instalar dependências
-        run: npm install
-
-      - name: Build do projeto
-        run: npm run build
-
-      - name: Mostrar arquivos gerados
-        run: ls -al dist/
-
-      - name: Deploy FTP para Hostinger
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: 📂 Deploy com FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
         with:
           server: ${{ secrets.FTP_HOST }}
-          port: 21
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          local-dir: dist/
-          server-dir: /
-          dangerous-clean-slate: true
-          dry-run: false
-          log-level: verbose
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/
+          protocol: ftp
+
