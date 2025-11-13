@@ -13,8 +13,8 @@ jobs:
       - name: 📦 Clonar o repositório
         uses: actions/checkout@v3
 
-      - name: 🚀 Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.6
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ${{ secrets.FTP_HOST }}
           port: 21
