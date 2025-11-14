@@ -1,29 +1,37 @@
-name: 🚀 Deploy para Napoleon via FTP
+name: 🚀 Deploy Gadu Host para Servidor FTP
 
 on:
-  workflow_dispatch:  # Permite rodar manualmente se quiser
   push:
     branches:
-      - 'claude/nails-course-landing-page-011CV4KzgzRmMZwmb2HwuMnf'
+      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📦 Clonar o repositório
+      - name: 📥 Checkout do código
         uses: actions/checkout@v3
 
-      - name: 📂 Sync files
+      - name: 🚀 Deploy via FTP para public_html
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
-          protocol: ftp    # Ou ftps se o servidor exigir
-          server-dir: /
-          local-dir: ./    # Se não tiver build, deixa assim
-          dangerous-clean-slate: true
+          protocol: ftp
+          local-dir: ./
+          server-dir: /public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/specialists/**
+            **/.github/**
+            **/README.md
+            **/.gitignore
+          dangerous-clean-slate: false
           dry-run: false
           log-level: verbose
