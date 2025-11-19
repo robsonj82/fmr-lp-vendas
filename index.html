@@ -23,6 +23,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Initialize dataLayer BEFORE GTM -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+    </script>
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -576,6 +581,22 @@
             </div>
         </div>
     </footer>
+
+    <!-- Push PageView event to dataLayer -->
+    <script>
+        // Ensure dataLayer exists
+        window.dataLayer = window.dataLayer || [];
+
+        // Push PageView event for Facebook Pixel via GTM
+        window.dataLayer.push({
+            'event': 'pageView',
+            'pagePath': window.location.pathname,
+            'pageTitle': document.title
+        });
+
+        // Log for debugging
+        console.log('PageView event pushed to dataLayer');
+    </script>
 
     <script src="assets/js/script.js"></script>
 </body>
