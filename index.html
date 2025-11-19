@@ -621,8 +621,13 @@
 
     <!-- Pixel Debugging Script -->
     <script>
+        // Immediate debug
+        console.log('🔍 PIXEL DEBUG SCRIPT LOADED');
+
         // Check Facebook Pixel status after everything loads
         window.addEventListener('load', function() {
+            console.log('⏰ Page loaded, starting pixel check in 2 seconds...');
+
             setTimeout(function() {
                 console.group('🔍 Facebook Pixel Debug Info');
                 console.log('Current domain:', window.location.hostname);
