@@ -625,6 +625,8 @@
         window.addEventListener('load', function() {
             setTimeout(function() {
                 console.group('🔍 Facebook Pixel Debug Info');
+                console.log('Current domain:', window.location.hostname);
+                console.log('Current URL:', window.location.href);
                 console.log('fbq function exists:', typeof fbq !== 'undefined');
                 console.log('_fbq exists:', typeof _fbq !== 'undefined');
                 console.log('window.dataLayer:', window.dataLayer);
@@ -639,10 +641,30 @@
                 console.log('GTM Container ID:', 'GTM-N2C8BZX8');
                 console.log('google_tag_manager exists:', typeof google_tag_manager !== 'undefined');
 
+                // Check for pixel errors
+                if (window._fbq && window._fbq.pendingConfigs) {
+                    console.log('Pixel configs:', window._fbq.pendingConfigs);
+                }
+
                 // Try to manually trigger PageView if fbq exists
                 if (typeof fbq !== 'undefined') {
                     console.log('✅ Facebook Pixel is loaded! Triggering PageView...');
-                    fbq('track', 'PageView');
+
+                    // Try withGrantConsent first (for traffic permissions)
+                    try {
+                        fbq('consent', 'grant');
+                        console.log('Consent granted');
+                    } catch (e) {
+                        console.log('Consent method not available:', e.message);
+                    }
+
+                    // Track PageView
+                    try {
+                        fbq('track', 'PageView');
+                        console.log('PageView tracked successfully');
+                    } catch (e) {
+                        console.error('Error tracking PageView:', e.message);
+                    }
                 } else {
                     console.error('❌ Facebook Pixel (fbq) is NOT loaded');
                     console.log('Possible causes:');
@@ -652,6 +674,9 @@
                     console.log('4. Check if ad blockers are interfering');
                 }
                 console.groupEnd();
+
+                // Check for network errors related to Facebook
+                console.log('💡 TIP: Check Network tab for failed requests to connect.facebook.net or facebook.com');
             }, 2000); // Wait 2 seconds for everything to load
         });
     </script>
