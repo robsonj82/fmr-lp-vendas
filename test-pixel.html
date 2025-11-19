@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Teste Facebook Pixel - Fernanda Bento</title>
+
+    <!-- Facebook Pixel Code (Direct Implementation) -->
+    <script>
+    console.log('🚀 TESTE: Loading Facebook Pixel Code...');
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1404272104748079');
+    fbq('track', 'PageView');
+    console.log('✅ TESTE: Facebook Pixel carregado!');
+    console.log('✅ TESTE: Pixel ID 1404272104748079');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1404272104748079&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+</head>
+<body>
+    <h1>Teste do Facebook Pixel</h1>
+    <p>Se o pixel estiver funcionando, você verá mensagens no console.</p>
+    <p>Abra o DevTools (F12) e verifique o Console.</p>
+
+    <script>
+        console.log('📄 Página de teste carregada em:', new Date().toLocaleString('pt-BR'));
+        console.log('🌐 Domínio:', window.location.hostname);
+        console.log('📍 URL completa:', window.location.href);
+
+        setTimeout(function() {
+            console.group('🔍 Status do Facebook Pixel');
+            console.log('fbq existe?', typeof fbq !== 'undefined');
+            console.log('_fbq existe?', typeof _fbq !== 'undefined');
+
+            if (typeof fbq !== 'undefined') {
+                console.log('✅ Pixel funcionando!');
+            } else {
+                console.error('❌ Pixel NÃO carregou!');
+            }
+            console.groupEnd();
+        }, 3000);
+    </script>
+</body>
+</html>
