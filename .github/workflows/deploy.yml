@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - claude/nails-course-landing-page-011CV4KzgzRmMZwmb2HwuMnf
   workflow_dispatch:
 
 jobs:
