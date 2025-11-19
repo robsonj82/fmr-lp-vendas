@@ -641,10 +641,22 @@
                 console.log('GTM Container ID:', 'GTM-N2C8BZX8');
                 console.log('google_tag_manager exists:', typeof google_tag_manager !== 'undefined');
 
-                // Check for pixel errors
-                if (window._fbq && window._fbq.pendingConfigs) {
-                    console.log('Pixel configs:', window._fbq.pendingConfigs);
+                // Check for pixel errors and configuration
+                if (window._fbq) {
+                    console.log('_fbq object exists:', window._fbq);
+                    if (window._fbq.pendingConfigs) {
+                        console.log('Pixel configs:', window._fbq.pendingConfigs);
+                    }
+                    if (window._fbq.instance) {
+                        console.log('Pixel instances:', window._fbq.instance);
+                    }
                 }
+
+                // Check if Pixel ID is being loaded
+                const pixelScripts = Array.from(document.scripts).filter(s =>
+                    s.innerHTML.includes('1404272104748079') || s.innerHTML.includes('fbq')
+                );
+                console.log('Scripts containing Pixel ID or fbq:', pixelScripts.length);
 
                 // Check if fbq exists (DO NOT trigger manually to avoid duplicates)
                 if (typeof fbq !== 'undefined') {
