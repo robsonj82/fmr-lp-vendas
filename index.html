@@ -646,25 +646,20 @@
                     console.log('Pixel configs:', window._fbq.pendingConfigs);
                 }
 
-                // Try to manually trigger PageView if fbq exists
+                // Check if fbq exists (DO NOT trigger manually to avoid duplicates)
                 if (typeof fbq !== 'undefined') {
-                    console.log('✅ Facebook Pixel is loaded! Triggering PageView...');
+                    console.log('✅ Facebook Pixel is loaded!');
 
-                    // Try withGrantConsent first (for traffic permissions)
+                    // Grant consent for traffic permissions (if needed)
                     try {
                         fbq('consent', 'grant');
-                        console.log('Consent granted');
+                        console.log('Consent granted for traffic permissions');
                     } catch (e) {
                         console.log('Consent method not available:', e.message);
                     }
 
-                    // Track PageView
-                    try {
-                        fbq('track', 'PageView');
-                        console.log('PageView tracked successfully');
-                    } catch (e) {
-                        console.error('Error tracking PageView:', e.message);
-                    }
+                    // Note: PageView is already tracked by GTM, no need to manually trigger
+                    console.log('ℹ️ PageView event should be tracked by GTM automatically');
                 } else {
                     console.error('❌ Facebook Pixel (fbq) is NOT loaded');
                     console.log('Possible causes:');
