@@ -84,6 +84,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const buttonText = this.querySelector('span')?.textContent || 'CTA Click';
             console.log('CTA Clicked:', buttonText);
 
+            // Push event to dataLayer for GTM
+            if (typeof window.dataLayer !== 'undefined') {
+                window.dataLayer.push({
+                    'event': 'cta_click',
+                    'button_text': buttonText,
+                    'button_location': this.closest('section')?.className || 'unknown'
+                });
+                console.log('CTA event pushed to dataLayer');
+            } else {
+                console.warn('dataLayer not available');
+            }
+
             // Optional: Send to analytics
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'click', {
@@ -91,11 +103,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     'event_label': buttonText,
                     'value': 1
                 });
+                console.log('gtag event sent');
+            } else {
+                console.warn('gtag not available');
             }
 
             // Optional: Facebook Pixel
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'Lead');
+                console.log('Facebook Pixel Lead event sent');
+            } else {
+                console.warn('fbq (Facebook Pixel) not available - Check if Pixel is loaded via GTM');
             }
         });
     });
